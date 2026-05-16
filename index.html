@@ -63,7 +63,7 @@
 
         <div class="header">
             <div>
-                <div class="location" id="locName">London</div>
+                <div class="location" id="locName">Istanbul</div>
                 <div class="date" id="liveDate">--</div>
             </div>
             <div class="action-btns">
@@ -90,7 +90,9 @@
     </div>
 
     <script>
-        let currentCoords = { lat: 51.5074, lon: -0.1278, name: "London" };
+        // Akıllı Hafıza (Kullanıcının en son baktığı yeri veya favorilerini hatırlar)
+        let lastCoords = JSON.parse(localStorage.getItem('skyline_last_coords')) || { lat: 41.0082, lon: 28.9784, name: "Istanbul" };
+        let currentCoords = { ...lastCoords };
         let favorites = JSON.parse(localStorage.getItem('skyline_favs')) || [];
         let config = { temp: 'C', wind: 'kmh', lang: 'en' };
 
@@ -106,9 +108,15 @@
             const browserLang = navigator.language.split('-')[0];
             if (translations[browserLang]) config.lang = browserLang;
             document.getElementById('langSelect').value = config.lang;
+            
             changeLanguage(config.lang);
             renderFavorites();
+            
+            // Bekletme Yok! Hafızadaki en son şehri anında ekrana basar.
             fetchWeatherData(currentCoords.lat, currentCoords.lon, currentCoords.name);
+            
+            // Arka planda çaktırmadan canlı konumu günceller (kullanıcıyı dondurmaz)
+            setTimeout(syncEcosystem, 1000);
         };
 
         function toggleSettings() {
@@ -142,14 +150,19 @@
         async function searchLocation() {
             const query = document.getElementById('searchInput').value;
             if(!query) return;
+            document.getElementById('mainDesc').innerText = "Searching...";
             try {
                 const res = await fetch(`https://open-meteo.com{encodeURIComponent(query)}&count=1&format=json`);
                 const data = await res.json();
-                if(!data || !data.results || data.results.length === 0) { alert(translations[config.lang].err); return; }
+                if(!data || !data.results || data.results.length === 0) { alert(translations[config.lang].err); document.getElementById('mainDesc').innerText = "Active Sync"; return; }
                 const target = data.results[0];
                 currentCoords = { lat: target.latitude, lon: target.longitude, name: target.name };
+                
+                // En son başarılı aramayı hafızaya kaydet
+                localStorage.setItem('skyline_last_coords', JSON.stringify(currentCoords));
+                
                 fetchWeatherData(target.latitude, target.longitude, target.name);
-            } catch(e) { fetchWeatherData(currentCoords.lat, currentCoords.lon, currentCoords.name); }
+            } catch(e) { document.getElementById('mainDesc').innerText = "Network Slow"; }
         }
 
         async function fetchWeatherData(lat, lon, name) {
@@ -207,14 +220,17 @@
         function loadFavorite(idx) {
             const fav = favorites[idx];
             currentCoords = { ...fav };
+            localStorage.setItem('skyline_last_coords', JSON.stringify(currentCoords));
             fetchWeatherData(fav.lat, fav.lon, fav.name);
         }
 
         function syncEcosystem() {
             navigator.geolocation.getCurrentPosition((pos) => {
                 currentCoords = { lat: pos.coords.latitude, lon: pos.coords.longitude, name: "Current Location" };
+                localStorage.setItem('skyline_last_coords', JSON.stringify(currentCoords));
                 fetchWeatherData(pos.coords.latitude, pos.coords.longitude, "Current Location");
             }, () => {
+                // Engel durumunda hafızadaki eski şehri korur, hata basmaz.
                 fetchWeatherData(currentCoords.lat, currentCoords.lon, currentCoords.name);
             });
         }
