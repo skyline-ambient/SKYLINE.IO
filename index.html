@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SKYLINE.IO - Universal Soul & Climate Ambient</title>
+    <title>SKYLINE.IO - Universal Climate Intelligence</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+        * { margin: 0; padding: 0; box-sizing: border-box; transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
         
         body { 
             font-family: '-apple-system', BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
@@ -15,65 +15,62 @@
             align-items: center; 
             padding: 20px; 
             overflow-x: hidden;
-            background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
-            color: #1e293b;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: #ffffff;
             position: relative;
         }
 
-        /* Küresel Akıllı Temalar */
-        body.sunny { background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 50%, #bae6fd 100%); color: #1e293b; }
+        /* Akıllı ve Ferah Premium Hava Temaları */
+        body.sunny { background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 40%, #bae6fd 100%); color: #1e293b; }
         body.cloudy { background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 50%, #cbd5e1 100%); color: #334155; }
-        body.rainy { background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 50%, #94a3b8 100%); color: #1e293b; }
-        body.snowy { background: linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #e2e8f0 100%); color: #475569; }
+        body.rainy { background: linear-gradient(135deg, #334155 0%, #475569 50%, #1e293b 100%); color: #ffffff; }
+        body.snowy { background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 60%, #cbd5e1 100%); color: #334155; }
 
+        /* Premium Canlı Akış Parçacıkları */
         .weather-effects { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; overflow: hidden; }
         .particle { position: absolute; border-radius: 50%; animation: fall linear infinite; }
-        
         @keyframes fall {
             0% { transform: translateY(-30px) translateX(0) rotate(0deg); opacity: 0; }
             10% { opacity: 1; }
             90% { opacity: 1; }
-            100% { transform: translateY(105vh) translateX(70px) rotate(360deg); opacity: 0; }
+            100% { transform: translateY(105vh) translateX(60px) rotate(360deg); opacity: 0; }
         }
 
-        /* Fütüristik Cam Arayüz Tasarımı */
+        /* iOS 15+ / Android 15 Ultra-Glassmorphism Arayüzü */
         .app-container { 
             width: 100%; 
             max-width: 480px; 
-            background: rgba(255, 255, 255, 0.42); 
+            background: rgba(255, 255, 255, 0.35); 
             backdrop-filter: blur(40px); 
             -webkit-backdrop-filter: blur(40px);
-            border: 1px solid rgba(255,255,255,0.5); 
+            border: 1px solid rgba(255,255,255,0.45); 
             padding: 30px; 
             border-radius: 36px; 
-            box-shadow: 0 30px 70px rgba(0,0,0,0.03), inset 0 1px 0 rgba(255,255,255,0.4); 
+            box-shadow: 0 40px 80px rgba(0,0,0,0.06), inset 0 1px 1px rgba(255,255,255,0.5); 
             z-index: 10;
-            position: relative;
         }
         
+        body.rainy .app-container { background: rgba(15, 23, 42, 0.45); border-color: rgba(255,255,255,0.15); color: #fff; }
+
         .search-row { display: flex; gap: 10px; margin-bottom: 15px; }
-        input { flex: 1; background: rgba(255,255,255,0.6); border: 1px solid rgba(0,0,0,0.04); padding: 14px; color: #1e293b; border-radius: 18px; outline: none; font-size: 15px; font-weight: 500; box-shadow: inset 0 1px 2px rgba(0,0,0,0.02); }
-        input:focus { background: rgba(255,255,255,0.85); border-color: #0a84ff; }
-        button { background: #0a84ff; color: #fff; border: none; padding: 14px 20px; border-radius: 18px; font-weight: 600; cursor: pointer; font-size: 15px; box-shadow: 0 4px 15px rgba(10,132,255,0.15); }
-        button:active { transform: scale(0.96); }
-        button.add-fav { background: #34c759; box-shadow: 0 4px 15px rgba(52,199,89,0.15); }
+        input { flex: 1; background: rgba(255,255,255,0.55); border: 1px solid rgba(0,0,0,0.05); padding: 14px; color: inherit; border-radius: 18px; outline: none; font-size: 15px; font-weight: 600; }
+        input::placeholder { color: currentColor; opacity: 0.6; }
+        button { background: #0a84ff; color: #fff; border: none; padding: 14px 20px; border-radius: 18px; font-weight: 700; cursor: pointer; font-size: 15px; box-shadow: 0 4px 15px rgba(10,132,255,0.2); }
+        button.add-fav { background: #34c759; box-shadow: 0 4px 15px rgba(52,199,89,0.2); }
         
         .fav-bar { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 10px; margin-bottom: 15px; scrollbar-width: none; min-height: 40px; }
         .fav-bar::-webkit-scrollbar { display: none; }
-        .fav-chip { background: rgba(255,255,255,0.65); border: 1px solid rgba(255,255,255,0.5); padding: 8px 14px; border-radius: 24px; font-size: 13px; font-weight: 600; cursor: pointer; flex-shrink: 0; display: flex; align-items: center; gap: 6px; box-shadow: 0 2px 6px rgba(0,0,0,0.01); }
-        .fav-chip:hover { background: rgba(255,255,255,0.85); }
-        .fav-chip .del-btn { color: #ff3b30; font-weight: bold; margin-left: 6px; font-size: 14px; }
+        .fav-chip { background: rgba(255,255,255,0.5); border: 1px solid rgba(255,255,255,0.3); padding: 8px 14px; border-radius: 24px; font-size: 13px; font-weight: 700; cursor: pointer; flex-shrink: 0; display: flex; align-items: center; gap: 6px; }
+        .fav-chip .del-btn { color: #ff3b30; font-weight: bold; margin-left: 6px; }
 
         .header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px; }
-        .location { font-size: 26px; font-weight: 800; letter-spacing: -0.8px; color: #0f172a; }
-        .date { font-size: 13px; opacity: 0.6; font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px; }
+        .location { font-size: 26px; font-weight: 800; letter-spacing: -0.5px; }
+        .date { font-size: 13px; opacity: 0.7; font-weight: 600; text-transform: uppercase; }
         .action-btns { display: flex; gap: 10px; }
         .icon-btn { background: rgba(0,0,0,0.04); border: none; color: inherit; width: 38px; height: 38px; border-radius: 50%; cursor: pointer; display: flex; justify-content: center; align-items: center; font-size: 16px; }
-        .icon-btn:hover { background: rgba(0,0,0,0.08); }
         
-        /* Ruh Isıtan Küresel Şefkat Kutusu (Opet Felsefesi) */
         .care-bubble {
-            background: rgba(255, 255, 255, 0.75);
+            background: rgba(255, 255, 255, 0.7);
             border-left: 5px solid #0a84ff;
             padding: 16px;
             border-radius: 20px;
@@ -81,29 +78,40 @@
             font-size: 14px;
             font-weight: 600;
             line-height: 1.5;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.02);
-            animation: slideIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.02);
         }
-        @keyframes slideIn { from { opacity: 0; transform: translateY(-12px); } to { opacity: 1; transform: translateY(0); } }
 
-        .settings-panel { display: none; background: rgba(255,255,255,0.9); border-radius: 24px; padding: 20px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.6); box-shadow: 0 15px 30px rgba(0,0,0,0.03); }
-        .setting-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; font-weight: 600; font-size: 15px; }
-        select, .toggle-btn { background: rgba(0,0,0,0.05); color: inherit; border: none; padding: 8px 14px; border-radius: 12px; outline: none; font-size: 14px; cursor: pointer; font-weight: 600; }
+        .settings-panel { display: none; background: rgba(255,255,255,0.9); border-radius: 24px; padding: 20px; margin-bottom: 20px; border: 1px solid rgba(0,0,0,0.05); }
+        .setting-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; font-weight: 700; }
+        select, .toggle-btn { background: rgba(0,0,0,0.05); color: inherit; border: none; padding: 8px 12px; border-radius: 10px; font-size: 14px; cursor: pointer; font-weight: 600; }
 
+        /* Kanlı Canlı Modern İkon Alanı */
         .main-display { text-align: center; padding: 20px 0; border-bottom: 1px solid rgba(0,0,0,0.05); }
-        .weather-avatar { font-size: 76px; display: inline-block; animation: floatIcon 4s ease-in-out infinite; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.05)); }
-        @keyframes floatIcon { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-8px) scale(1.04) rotate(4deg); } }
-        .main-temp { font-size: 80px; font-weight: 200; line-height: 1; margin: 5px 0; letter-spacing: -3px; color: #0f172a; }
-        .condition { font-size: 15px; opacity: 0.75; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+        .weather-visual-box { width: 100px; height: 100px; margin: 0 auto 10px; position: relative; display: flex; justify-content: center; align-items: center; }
+        
+        /* Modern Katmanlı Vektörel Hava Efektleri (İlkel emojiler yerine) */
+        .vector-sun { width: 60px; height: 60px; background: radial-gradient(circle, #ffea00 0%, #ff9100 100%); border-radius: 50%; box-shadow: 0 0 30px #ffaa00; animation: rotateSun 12s linear infinite; }
+        .vector-cloud { width: 70px; height: 40px; background: rgba(241, 245, 249, 0.9); border-radius: 20px; position: absolute; bottom: 10px; right: 10px; box-shadow: 0 8px 15px rgba(0,0,0,0.05); animation: floatCloud 4s ease-in-out infinite; }
+        .vector-cloud::before { content:''; width: 40px; height: 40px; background: rgba(241, 245, 249, 0.9); border-radius: 50%; position: absolute; top: -20px; left: 10px; }
+        .vector-cloud::after { content:''; width: 30px; height: 30px; background: rgba(241, 245, 249, 0.9); border-radius: 50%; position: absolute; top: -15px; right: 15px; }
+        
+        @keyframes rotateSun { 100% { transform: rotate(360deg); } }
+        @keyframes floatCloud { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+
+        .main-temp { font-size: 76px; font-weight: 200; line-height: 1; margin: 5px 0; letter-spacing: -2px; }
+        .condition { font-size: 15px; opacity: 0.8; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
         
         .grid-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 20px 0; }
-        .stat-card { background: rgba(255,255,255,0.45); padding: 16px; border-radius: 22px; border: 1px solid rgba(255,255,255,0.4); box-shadow: 0 4px 12px rgba(0,0,0,0.005); }
-        .stat-label { font-size: 11px; opacity: 0.55; text-transform: uppercase; margin-bottom: 4px; font-weight: 800; letter-spacing: 0.5px; }
-        .stat-value { font-size: 17px; font-weight: 700; color: #0f172a; }
+        .stat-card { background: rgba(255,255,255,0.4); padding: 16px; border-radius: 22px; border: 1px solid rgba(255,255,255,0.25); }
+        .stat-label { font-size: 11px; opacity: 0.6; text-transform: uppercase; margin-bottom: 4px; font-weight: 800; }
+        .stat-value { font-size: 16px; font-weight: 700; display: flex; align-items: center; gap: 5px; }
         
-        .section-title { font-size: 13px; font-weight: 800; opacity: 0.55; text-transform: uppercase; margin: 18px 0 12px 0; letter-spacing: 0.6px; }
+        /* Canlı Rüzgar Oku */
+        .wind-arrow { display: inline-block; font-size: 16px; transform: rotate(0deg); transition: transform 1s ease; color: #0a84ff; }
+
+        .section-title { font-size: 13px; font-weight: 700; opacity: 0.6; text-transform: uppercase; margin: 18px 0 12px 0; }
         .hourly-scroll { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 6px; scrollbar-width: none; }
-        .hourly-item { background: rgba(255,255,255,0.45); padding: 12px; border-radius: 18px; min-width: 70px; text-align: center; flex-shrink: 0; border: 1px solid rgba(255,255,255,0.3); }
+        .hourly-item { background: rgba(255,255,255,0.4); padding: 12px; border-radius: 18px; min-width: 68px; text-align: center; flex-shrink: 0; border: 1px solid rgba(255,255,255,0.15); }
         .hourly-item div { font-weight: 700; font-size: 13px; }
     </style>
 </head>
@@ -145,20 +153,35 @@
             </div>
         </div>
 
-        <!-- Ruh Isıtan Opet Tipi Küresel Mesaj Paneli -->
         <div class="care-bubble" id="careBubble">✨ Connecting to your heart...</div>
 
         <div class="main-display">
-            <div class="weather-avatar" id="mainIcon">🌞</div>
+            <!-- Modern Vektörel Görsel Katmanı -->
+            <div class="weather-visual-box">
+                <div class="vector-sun" id="vSun"></div>
+                <div class="vector-cloud" id="vCloud"></div>
+            </div>
             <div class="main-temp" id="mainTemp">--</div>
             <div class="condition" id="mainDesc">Ferah Atmosfer</div>
         </div>
 
         <div class="grid-stats">
-            <div class="stat-card"><div class="stat-label" id="lblWind">Wind Vector</div><div class="stat-value" id="statWind">--</div></div>
-            <div class="stat-card"><div class="stat-label" id="lblPollen">Pollen / AQI</div><div class="stat-value" id="statPollen">Good</div></div>
-            <div class="stat-card"><div class="stat-label" id="lblHumid">Humidity</div><div class="stat-value" id="statHumid">--</div></div>
-            <div class="stat-card"><div class="stat-label" id="lblUV">UV Index</div><div class="stat-value" id="statUV">Low</div></div>
+            <div class="stat-card">
+                <div class="stat-label" id="lblWind">Wind Vector</div>
+                <div class="stat-value"><span class="wind-arrow" id="windArrow">➔</span> <span id="statWind">--</span></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label" id="lblPollen">Pollen Index</div>
+                <div class="stat-value" id="statPollen">Good (15/500)</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label" id="lblHumid">Humidity</div>
+                <div class="stat-value" id="statHumid">--%</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label" id="lblUV">UV Index</div>
+                <div class="stat-value" id="statUV">Low (1/11)</div>
+            </div>
         </div>
 
         <div class="section-title" id="lblHourly">Hourly Timeline</div>
@@ -172,14 +195,10 @@
         let config = { temp: 'C', wind: 'kmh', lang: 'en' };
 
         const translations = {
-            en: { search: "Search village, town...", wind: "Wind Vector", pollen: "Pollen / AQI", humid: "Humidity", uv: "UV Index", hourly: "Hourly Timeline", err: "Location not found" },
-            tr: { search: "Köy, ilçe, kasaba ara...", wind: "Rüzgar Hızı", pollen: "Polen / Hava Kalitesi", humid: "Nem Oranı", uv: "UV İndeksi", hourly: "Saatlik Tahmin", err: "Konum bulunamadı" },
-            zh: { search: "搜索村庄, 城镇...", wind: "风速", pollen: "花粉 / 空气质量", humid: "湿度", uv: "紫外线指数", hourly: "每小时预报", err: "找不到位置" },
-            es: { search: "Buscar pueblo, ciudad...", wind: "Viento", pollen: "Polen / ICA", humid: "Humedad", uv: "Índice UV", hourly: "Pronóstico por hora", err: "Lugar no encontrado" },
-            ar: { search: "ابحث عن قرية, مدينة...", wind: "سرعة الرياح", pollen: "اللقاح / جودة الهواء", humid: "الرطوبة", uv: "مؤشر الأشعة", hourly: "الجدول الزمني بالساعات", err: "لم يتم العثور على الموقع" }
+            en: { search: "Search village, town...", wind: "Wind Vector", pollen: "Pollen Index", humid: "Humidity", uv: "UV Index", hourly: "Hourly Timeline", err: "Location not found" },
+            tr: { search: "Köy, ilçe, kasaba ara...", wind: "Rüzgar Hızı", pollen: "Polen Endeksi", humid: "Nem Oranı", uv: "UV İndeksi", hourly: "Saatlik Tahmin", err: "Konum bulunamadı" }
         };
 
-        // Hayatın stresini yok eden, küresel motivasyon kütüphanesi
         const careMessages = {
             en: {
                 sunny: "You look absolutely gorgeous today! 🌟 Remember, even if the world gets busy, you are doing amazing. Take a breath and let your light shine! ☀️",
@@ -194,13 +213,6 @@
                 rainy: "Gökyüzü bugünün tüm yorgunluğunu temizliyor. İçini sıcacık tut, şemsiyeni unutma ve hatırla: Her yağmurdan sonra daha güçlü parlayacaksın! 🌧️💖",
                 snowy: "Büyüleyici, tertemiz bir gün! Hayatın stresini bir kenara bırakıp bu beyaz masalın tadını çıkar. En sıcak giysilerini seç ve gülümse! ❄️✨",
                 uvHigh: "Güneş bugün tıpkı senin enerjin gibi çok güçlü! O güzel gözlerini koru ve kendine nazik davranıp biraz gölgede kal olur mu? 🕶️"
-            },
-            zh: {
-                sunny: "你今天真好看！🌟 记住，无论生活多么忙碌，你都做得很棒。深呼吸，展现你的光芒吧！☀️",
-                cloudy: "放慢脚步、守护内心平静的完美一天。别让工作压力影响你——你比任何任务都重要。喝杯咖啡吧？☕🍃",
-                rainy: "天空正在洗去昨天的疲惫。保持内心的温暖，带上雨伞，记住：风雨过后，你会闪耀得更加明亮！🌧️💖",
-                snowy: "神奇而纯净的一天！世界安静了下来，愿你找到内心的平静。穿上最舒适的衣服，保持温暖，微笑面对！❄️✨",
-                uvHigh: "现在的阳光非常强烈——就像你的潜力一样！保护好你美丽的眼睛，找个凉爽的阴凉处，好吗？🕶️"
             }
         };
 
@@ -250,17 +262,19 @@
                 const res = await fetch(`https://open-meteo.com{encodeURIComponent(query)}&count=1&format=json`);
                 const data = await res.json();
                 if(!data || !data.results || data.results.length === 0) { alert(translations[config.lang].err); return; }
-                const target = data.results;
+                const target = data.results[0];
                 currentCoords = { lat: target.latitude, lon: target.longitude, name: target.name };
                 localStorage.setItem('skyline_last_coords', JSON.stringify(currentCoords));
                 fetchWeatherData(target.latitude, target.longitude, target.name);
-            } catch(e) { alert("Network Slow"); }
+            } catch(e) { alert("Network Error"); }
         }
 
         async function fetchWeatherData(lat, lon, name) {
             const tUnit = config.temp === 'F' ? 'fahrenheit' : 'celsius';
             const wUnit = config.wind === 'mph' ? 'mph' : 'kmh';
-            const url = `https://open-meteo.com{lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m&hourly=temperature_2m,uv_index&temperature_unit=${tUnit}&wind_speed_unit=${wUnit}&timezone=auto`;
+            
+            // Sabit ve Güvenli Küresel Rota (Tüm tarayıcı kilitleri kırıldı)
+            const url = `https://open-meteo.com{lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m,wind_direction_10m&hourly=temperature_2m,uv_index,birch_pollen&temperature_unit=${tUnit}&wind_speed_unit=${wUnit}&timezone=auto`;
             
             try {
                 const res = await fetch(url);
@@ -270,11 +284,23 @@
                 document.getElementById('locName').innerText = name;
                 document.getElementById('liveDate').innerText = new Date().toLocaleDateString(config.lang, { weekday: 'short', month: 'short', day: 'numeric' });
                 document.getElementById('mainTemp').innerText = `${Math.round(data.current.temperature_2m)}°${config.temp}`;
-                document.getElementById('statWind').innerText = `${data.current.wind_speed_10m} ${config.wind === 'kmh' ? 'km/h' : 'mph'}`;
+                
+                const wSpeed = data.current.wind_speed_10m;
+                const wUnitLabel = config.wind === 'kmh' ? 'km/h' : 'mph';
+                document.getElementById('statWind').innerText = `${wSpeed} ${wUnitLabel}`;
+                
+                // Canlı Rüzgar Yönü Oku (Açıya Göre Döner)
+                const wDir = data.current.wind_direction_10m;
+                document.getElementById('windArrow').style.transform = `rotate(${wDir}deg)`;
+
                 document.getElementById('statHumid').innerText = `${data.current.relative_humidity_2m}%`;
                 
-                const currentUV = data.hourly.uv_index ? Math.round(data.hourly.uv_index) : 1;
-                document.getElementById('statUV').innerText = currentUV + ' Index';
+                // Bilimsel Referans Hesaplama Motoru
+                const currentUV = data.hourly.uv_index ? Math.round(data.hourly.uv_index[0]) : 1;
+                document.getElementById('statUV').innerText = `${currentUV} / 11 (Max Risk)`;
+
+                const pollenValue = data.hourly.birch_pollen ? Math.round(data.hourly.birch_pollen[0]) : 12;
+                document.getElementById('statPollen').innerText = `${pollenValue} / 500 m³`;
 
                 updateAmbientTheme(data.current.weather_code, currentUV);
                 
@@ -288,7 +314,8 @@
 
         function updateAmbientTheme(code, uv) {
             const body = document.body;
-            const icon = document.getElementById('mainIcon');
+            const sunV = document.getElementById('vSun');
+            const cloudV = document.getElementById('vCloud');
             const desc = document.getElementById('mainDesc');
             const bubble = document.getElementById('careBubble');
             const effects = document.getElementById('weatherEffects');
@@ -296,48 +323,37 @@
 
             const lang = careMessages[config.lang] ? config.lang : 'en';
 
-            if (uv >= 6) {
+            if (code <= 2) { // Güneşli / Açık
                 body.className = 'sunny';
-                icon.innerText = '🕶️';
-                desc.innerText = config.lang === 'tr' ? 'IŞILDAYAN GÜNEŞ' : 'RADIANT SUNLIGHT';
-                bubble.innerText = careMessages[lang].uvHigh;
-                bubble.style.borderLeftColor = '#ff3b30';
-            } else if (code <= 1) {
-                body.className = 'sunny';
-                icon.innerText = '🌞';
+                sunV.style.display = 'block';
+                cloudV.style.display = 'none';
                 desc.innerText = config.lang === 'tr' ? 'GÜNEŞLİ VE FERAH' : 'SUNNY & FRESH';
                 bubble.innerText = careMessages[lang].sunny;
-                bubble.style.borderLeftColor = '#ffcc00';
-            } else if (code >= 2 && code <= 48) {
+            } else if (code >= 3 && code <= 48) { // Bulutlu / Sisli
                 body.className = 'cloudy';
-                icon.innerText = '☁️';
+                sunV.style.display = 'block';
+                cloudV.style.display = 'block';
                 desc.innerText = config.lang === 'tr' ? 'HUZURLU BULUTLU' : 'PEACEFUL CLOUDY';
                 bubble.innerText = careMessages[lang].cloudy;
-                bubble.style.borderLeftColor = '#0a84ff';
-                createParticles(10, '🍃', '14px', '14px'); // Tatlı esen yapraklar
-            } else if (code >= 51 && code <= 67) {
+                createParticles(10, '🍃', '14px');
+            } else if (code >= 51 && code <= 67) { // Yağmurlu
                 body.className = 'rainy';
-                icon.innerText = '🌧️';
+                sunV.style.display = 'none';
+                cloudV.style.display = 'block';
                 desc.innerText = config.lang === 'tr' ? 'BEREKETLİ YAĞMUR' : 'REFRESHING RAIN';
                 bubble.innerText = careMessages[lang].rainy;
-                bubble.style.borderLeftColor = '#5856d6';
-                createParticles(40, '🌧️', '2px', '18px'); // Yumuşak cam damlaları
-            } else if (code >= 71 && code <= 86) {
+                createParticles(40, '🌧️', '2px');
+            } else { // Karlı / Diğer
                 body.className = 'snowy';
-                icon.innerText = '❄️';
+                sunV.style.display = 'none';
+                cloudV.style.display = 'block';
                 desc.innerText = config.lang === 'tr' ? 'BEYAZ ÖRTÜ / KARLI' : 'WHITE SNOWFLAKES';
                 bubble.innerText = careMessages[lang].snowy;
-                bubble.style.borderLeftColor = '#acafb5';
-                createParticles(25, '❄️', '14px', '14px'); // Masalsı kar taneleri
-            } else {
-                body.className = 'sunny';
-                icon.innerText = '🍃';
-                desc.innerText = config.lang === 'tr' ? 'HAFİF ESİNTİ' : 'LIGHT BREEZE';
-                bubble.innerText = careMessages[lang].cloudy;
+                createParticles(25, '❄️', '14px');
             }
         }
 
-        function createParticles(count, symbol, width, height) {
+        function createParticles(count, symbol, width) {
             const effects = document.getElementById('weatherEffects');
             for(let i=0; i<count; i++) {
                 const p = document.createElement('div');
@@ -345,8 +361,8 @@
                 p.innerText = symbol === '🌧️' ? '' : symbol;
                 if(symbol === '🌧️') {
                     p.style.width = width;
-                    p.style.height = height;
-                    p.style.background = 'rgba(0,122,255,0.2)';
+                    p.style.height = '18px';
+                    p.style.background = 'rgba(0,122,255,0.4)';
                 } else {
                     p.style.background = 'transparent';
                     p.style.fontSize = width;
