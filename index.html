@@ -7,33 +7,23 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; transition: all 0.2s ease; }
         body { font-family: '-apple-system', BlinkMacSystemFont, sans-serif; background: #000000; color: #ffffff; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
-        .app-container { width: 100%; max-width: 480px; background: rgba(28, 28, 30, 0.7); backdrop-filter: blur(30px); border: 1px solid rgba(255,255,255,0.08); padding: 25px; border-radius: 32px; box-shadow: 0 30px 60px rgba(0,0,0,0.8); position: relative; }
-        
-        /* Search & Custom Favorites */
+        .app-container { width: 100%; max-width: 480px; background: rgba(28, 28, 30, 0.75); backdrop-filter: blur(30px); border: 1px solid rgba(255,255,255,0.08); padding: 25px; border-radius: 32px; box-shadow: 0 30px 60px rgba(0,0,0,0.8); }
         .search-row { display: flex; gap: 8px; margin-bottom: 12px; }
         input { flex: 1; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08); padding: 12px; color: #fff; border-radius: 14px; outline: none; font-size: 15px; }
-        button { background: #0a84ff; color: #fff; border: none; padding: 12px 16px; border-radius: 14px; font-weight: 600; cursor: pointer; }
+        button { background: #0a84ff; color: #fff; border: none; padding: 12px 16px; border-radius: 14px; font-weight: 600; cursor: pointer; font-size: 15px; }
         button.add-fav { background: #30d158; }
-        
-        .fav-bar { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 10px; margin-bottom: 15px; scrollbar-width: none; }
+        .fav-bar { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 10px; margin-bottom: 15px; scrollbar-width: none; min-height: 40px; }
         .fav-bar::-webkit-scrollbar { display: none; }
         .fav-chip { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); padding: 8px 14px; border-radius: 20px; font-size: 13px; cursor: pointer; flex-shrink: 0; display: flex; align-items: center; gap: 6px; }
-        .fav-chip .del-btn { color: #ff453a; font-weight: bold; margin-left: 4px; }
-
-        /* Header & Settings */
+        .fav-chip .del-btn { color: #ff453a; font-weight: bold; margin-left: 6px; font-size: 14px; }
         .header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; }
         .location { font-size: 22px; font-weight: 700; letter-spacing: -0.5px; }
         .date { font-size: 13px; color: #8e8e93; }
         .action-btns { display: flex; gap: 10px; }
         .icon-btn { background: rgba(255,255,255,0.1); border: none; color: #fff; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; display: flex; justify-content: center; align-items: center; font-size: 16px; }
-        
-        /* Settings Modal */
         .settings-panel { display: none; background: #1c1c1e; border: 1px solid rgba(255,255,255,0.1); border-radius: 24px; padding: 20px; margin-bottom: 20px; }
         .setting-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
-        .setting-row:last-child { margin-bottom: 0; }
         select, .toggle-btn { background: rgba(255,255,255,0.1); color: #fff; border: none; padding: 8px 12px; border-radius: 10px; outline: none; font-size: 14px; cursor: pointer; }
-
-        /* Weather UI */
         .main-display { text-align: center; padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
         .main-temp { font-size: 64px; font-weight: 200; line-height: 1; margin: 10px 0; }
         .condition { font-size: 16px; color: #8e8e93; }
@@ -43,34 +33,24 @@
         .stat-value { font-size: 17px; font-weight: 600; }
         .section-title { font-size: 13px; font-weight: 600; color: #8e8e93; text-transform: uppercase; margin: 15px 0 10px 0; }
         .hourly-scroll { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 5px; scrollbar-width: none; }
-        .hourly-item { background: rgba(255,255,255,0.03); padding: 10px; border-radius: 14px; min-width: 60px; text-align: center; flex-shrink: 0; }
+        .hourly-item { background: rgba(255,255,255,0.03); padding: 10px; border-radius: 14px; min-width: 65px; text-align: center; flex-shrink: 0; }
     </style>
 </head>
 <body>
 
     <div class="app-container">
-        <!-- Advanced Search System -->
         <div class="search-row">
             <input type="text" id="searchInput" placeholder="Search village, town, district...">
             <button onclick="searchLocation()">🔍</button>
             <button class="add-fav" onclick="addCurrentToFavorites()">＋</button>
         </div>
 
-        <!-- Dynamic Favorites Bar -->
         <div class="fav-bar" id="favBar"></div>
 
-        <!-- Hidden Settings Menu -->
         <div class="settings-panel" id="settingsPanel">
-            <div class="setting-row">
-                <span id="lblTempUnit">Temperature Unit</span>
-                <button class="toggle-btn" id="btnTempUnit" onclick="toggleTempUnit()">°C</button>
-            </div>
-            <div class="setting-row">
-                <span id="lblWindUnit">Wind Unit</span>
-                <button class="toggle-btn" id="btnWindUnit" onclick="toggleWindUnit()">km/h</button>
-            </div>
-            <div class="setting-row">
-                <span id="lblLang">Language</span>
+            <div class="setting-row"><span>Temperature Unit</span><button class="toggle-btn" id="btnTempUnit" onclick="toggleTempUnit()">°C</button></div>
+            <div class="setting-row"><span>Wind Unit</span><button class="toggle-btn" id="btnWindUnit" onclick="toggleWindUnit()">km/h</button></div>
+            <div class="setting-row"><span>Language</span>
                 <select id="langSelect" onchange="changeLanguage(this.value)">
                     <option value="en">English</option>
                     <option value="tr">Türkçe</option>
@@ -81,10 +61,9 @@
             </div>
         </div>
 
-        <!-- Main Workspace -->
         <div class="header">
             <div>
-                <div class="location" id="locName">Detecting Node...</div>
+                <div class="location" id="locName">London</div>
                 <div class="date" id="liveDate">--</div>
             </div>
             <div class="action-btns">
@@ -94,14 +73,14 @@
         </div>
 
         <div class="main-display">
-            <div style="font-size: 48px;">✨</div>
+            <div style="font-size: 48px;">🌤️</div>
             <div class="main-temp" id="mainTemp">--</div>
-            <div class="condition" id="mainDesc">Ready</div>
+            <div class="condition" id="mainDesc">Loading...</div>
         </div>
 
         <div class="grid-stats">
             <div class="stat-card"><div class="stat-label" id="lblWind">Wind Vector</div><div class="stat-value" id="statWind">--</div></div>
-            <div class="stat-card"><div class="stat-label" id="lblPollen">Pollen / AQI</div><div class="stat-value" id="statPollen">Optimal</div></div>
+            <div class="stat-card"><div class="stat-label" id="lblPollen">Pollen / AQI</div><div class="stat-value" id="statPollen">Good</div></div>
             <div class="stat-card"><div class="stat-label" id="lblHumid">Humidity</div><div class="stat-value" id="statHumid">--</div></div>
             <div class="stat-card"><div class="stat-label" id="lblUV">UV Index</div><div class="stat-value" id="statUV">Low</div></div>
         </div>
@@ -111,27 +90,25 @@
     </div>
 
     <script>
-        // Global State & Languages
-        let currentCoords = { lat: 41.0082, lon: 28.9784, name: "Istanbul" };
+        let currentCoords = { lat: 51.5074, lon: -0.1278, name: "London" };
         let favorites = JSON.parse(localStorage.getItem('skyline_favs')) || [];
         let config = { temp: 'C', wind: 'kmh', lang: 'en' };
 
         const translations = {
             en: { search: "Search village, town...", wind: "Wind Vector", pollen: "Pollen / AQI", humid: "Humidity", uv: "UV Index", hourly: "Hourly Timeline", err: "Location not found" },
             tr: { search: "Köy, ilçe, kasaba ara...", wind: "Rüzgar Hızı", pollen: "Polen / Hava Kalitesi", humid: "Nem Oranı", uv: "UV İndeksi", hourly: "Saatlik Tahmin", err: "Konum bulunamadı" },
-            zh: { search: "搜索村庄, 城镇...", wind: "风 vectors", pollen: "花粉 / 空气质量", humid: "湿度", uv: "紫外线指数", hourly: "每小时預報", err: "找不到位置" },
+            zh: { search: "搜索村庄, 城镇...", wind: "风速", pollen: "花粉 / 空气质量", humid: "湿度", uv: "紫外线指数", hourly: "每小时预报", err: "找不到位置" },
             es: { search: "Buscar pueblo, ciudad...", wind: "Viento", pollen: "Polen / ICA", humid: "Humedad", uv: "Índice UV", hourly: "Pronóstico por hora", err: "Lugar no encontrado" },
-            ar: { search: "ابحث عن قرية, مدينة...", wind: "اتجاه الرياح", pollen: "اللقاح / جودة الهواء", humid: "الرطوبة", uv: "مؤشر الأشعة", hourly: "الجدول الزمني بالساعات", err: "لم يتم العثور على الموقع" }
+            ar: { search: "ابحث عن قرية, مدينة...", wind: "سرعة الرياح", pollen: "اللقاح / جودة الهواء", humid: "الرطوبة", uv: "مؤشر الأشعة", hourly: "الجدول الزمني بالساعات", err: "لم يتم العثور على الموقع" }
         };
 
         window.onload = function() {
-            // Auto Detect Browser Language
             const browserLang = navigator.language.split('-')[0];
             if (translations[browserLang]) config.lang = browserLang;
             document.getElementById('langSelect').value = config.lang;
-            
+            changeLanguage(config.lang);
             renderFavorites();
-            syncEcosystem();
+            fetchWeatherData(currentCoords.lat, currentCoords.lon, currentCoords.name);
         };
 
         function toggleSettings() {
@@ -168,11 +145,11 @@
             try {
                 const res = await fetch(`https://open-meteo.com{encodeURIComponent(query)}&count=1&format=json`);
                 const data = await res.json();
-                if(!data.results) { alert(translations[config.lang].err); return; }
+                if(!data || !data.results || data.results.length === 0) { alert(translations[config.lang].err); return; }
                 const target = data.results[0];
                 currentCoords = { lat: target.latitude, lon: target.longitude, name: target.name };
                 fetchWeatherData(target.latitude, target.longitude, target.name);
-            } catch(e) { alert("Network error"); }
+            } catch(e) { alert("Connection error"); }
         }
 
         async function fetchWeatherData(lat, lon, name) {
@@ -183,11 +160,14 @@
             try {
                 const res = await fetch(url);
                 const data = await res.json();
+                if(!data || !data.current) return;
+                
                 document.getElementById('locName').innerText = name;
                 document.getElementById('liveDate').innerText = new Date().toLocaleDateString(config.lang, { weekday: 'short', month: 'short', day: 'numeric' });
                 document.getElementById('mainTemp').innerText = `${Math.round(data.current.temperature_2m)}°${config.temp}`;
                 document.getElementById('statWind').innerText = `${data.current.wind_speed_10m} ${config.wind === 'kmh' ? 'km/h' : 'mph'}`;
                 document.getElementById('statHumid').innerText = `${data.current.relative_humidity_2m}%`;
+                document.getElementById('mainDesc').innerText = "Active Sync";
                 
                 const hourlyCont = document.getElementById('hourlyContainer');
                 hourlyCont.innerHTML = '';
@@ -198,7 +178,7 @@
         }
 
         function addCurrentToFavorites() {
-            if(favorites.length >= 7) favorites.shift(); // En fazla 7 adet tut
+            if(favorites.length >= 7) favorites.shift();
             if(!favorites.some(f => f.name === currentCoords.name)) {
                 favorites.push({ ...currentCoords });
                 localStorage.setItem('skyline_favs', JSON.stringify(favorites));
